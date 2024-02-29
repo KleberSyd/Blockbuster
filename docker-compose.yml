@@ -2,6 +2,7 @@ version: '3.4'
 
 services:
   blockbuster:
+    container_name: blockbuster
     image: ${DOCKER_REGISTRY-}blockbuster
     build:
       context: .
@@ -9,7 +10,7 @@ services:
 
   db:
     image: mcr.microsoft.com/mssql/server:2019-latest # Use the desired SQL Server version
-    container_name: sqlserverdb
+    container_name: blockbuster-db
     environment:
       SA_PASSWORD: "YourStrong!Passw0rd"
       ACCEPT_EULA: "Y"
@@ -26,3 +27,9 @@ services:
         sleep 30 && /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'YourStrong!Passw0rd' -d master -i /var/opt/sqlscripts/application_db_context.sql
         wait
 
+
+volumes:
+  sql_data:
+    driver: local
+  data_protection_keys:
+    driver: local
