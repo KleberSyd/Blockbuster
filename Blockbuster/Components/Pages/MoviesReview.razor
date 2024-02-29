@@ -1,0 +1,173 @@
+﻿@page "/movies-review"
+
+<PageTitle>Blockbuster - Movies Review</PageTitle>
+
+<h1>Movies Review</h1>
+
+<div class="container mt-3">
+    <div class="row mb-3">
+        <div class="col">
+            <input type="search" class="form-control" placeholder="Search movies...">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 mb-3">
+            @foreach (var movie in movies)
+            {
+                <div class="card" >
+                    <img class="card-img-top img-fluid" src="@movie.ImageUrl" alt="@movie.MovieName">
+                    <div class="card-body">
+                        <h5 class="card-title">@movie.MovieName</h5>
+                        <p class="card-text">@movie.Description</p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Rating</td>
+                                            <td>@movie.Rating</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Duration</td>
+                                            <td>@(string.Format("{0}h {1}min", movie.TimeSpan / 60, movie.TimeSpan % 60))</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-md-4">
+            @foreach (var movie in movies)
+            {
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top img-fluid" src="@movie.ImageUrl" alt="@movie.MovieName">
+                    <div class="card-body">
+                        <h5 class="card-title">@movie.MovieName</h5>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+
+    private class Movie
+    {
+        public string MovieName { get; set; }
+        public int TimeSpan { get; set; }
+        public int Rating { get; set; }
+        public string Description { get; set; }
+        public string ImageUrl { get; set; }
+    }
+
+    private List<Movie> movies = new MovieDataService().GetMovies();
+
+    private class MovieDataService
+    {
+        public List<Movie> GetMovies() => new List<Movie>
+        {
+            new Movie
+            {
+                MovieName = "Inception",
+                TimeSpan = 148,
+                Rating = 7,
+                Description = "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.",
+                ImageUrl = "https://example.com/inception.jpg"
+            },
+            new Movie
+            {
+                MovieName = "Movie 2",
+                TimeSpan = 120,
+                Rating = 6,
+                Description = "Description of Movie 2",
+                ImageUrl = "https://example.com/movie2.jpg"
+            },
+            new Movie
+            {
+                MovieName = "Movie 3",
+                TimeSpan = 90,
+                Rating = 8,
+                Description = "Description of Movie 3",
+                ImageUrl = "https://example.com/movie3.jpg"
+            },
+            new Movie
+            {
+                MovieName = "Movie 4",
+                TimeSpan = 105,
+                Rating = 7,
+                Description = "Description of Movie 4",
+                ImageUrl = "https://example.com/movie4.jpg"
+            },
+            new Movie
+            {
+                MovieName = "Movie 5",
+                TimeSpan = 135,
+                Rating = 9,
+                Description = "Description of Movie 5",
+                ImageUrl = "https://example.com/movie5.jpg"
+            },
+            new Movie
+            {
+                MovieName = "Movie 6",
+                TimeSpan = 100,
+                Rating = 8,
+                Description = "Description of Movie 6",
+                ImageUrl = "https://example.com/movie6.jpg"
+            },
+            new Movie
+            {
+                MovieName = "Movie 7",
+                TimeSpan = 115,
+                Rating = 7,
+                Description = "Description of Movie 7",
+                ImageUrl = "https://example.com/movie7.jpg"
+            },
+            new Movie
+            {
+                MovieName = "Movie 8",
+                TimeSpan = 130,
+                Rating = 6,
+                Description = "Description of Movie 8",
+                ImageUrl = "https://example.com/movie8.jpg"
+            },
+            new Movie
+            {
+                MovieName = "Movie 9",
+                TimeSpan = 95,
+                Rating = 8,
+                Description = "Description of Movie 9",
+                ImageUrl = "https://example.com/movie9.jpg"
+            },
+            new Movie
+            {
+                MovieName = "Movie 10",
+                TimeSpan = 110,
+                Rating = 7,
+                Description = "Description of Movie 10",
+                ImageUrl = "https://example.com/movie10.jpg"
+            },
+            new Movie
+            {
+                MovieName = "Movie 11",
+                TimeSpan = 125,
+                Rating = 9,
+                Description = "Description of Movie 11",
+                ImageUrl = "https://example.com/movie11.jpg"
+            },
+            new Movie
+            {
+                MovieName = "Movie 12",
+                TimeSpan = 140,
+                Rating = 8,
+                Description = "Description of Movie 12",
+                ImageUrl = "https://example.com/movie12.jpg"
+            }
+        };
+    }
+
+}
