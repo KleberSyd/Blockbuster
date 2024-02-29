@@ -11,25 +11,25 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8 mb-3">
-            @foreach (var movie in movies)
+        <div class="col-md-8">
+            @if (selectedMovie != null)
             {
-                <div class="card" >
-                    <img class="card-img-top img-fluid" src="@movie.ImageUrl" alt="@movie.MovieName">
+                <div class="card">
+                    <img class="card-img-top img-fluid" src="@selectedMovie.ImageUrl" alt="@selectedMovie.MovieName">
                     <div class="card-body">
-                        <h5 class="card-title">@movie.MovieName</h5>
-                        <p class="card-text">@movie.Description</p>
+                        <h5 class="card-title">@selectedMovie.MovieName</h5>
+                        <p class="card-text">@selectedMovie.Description</p>
                         <div class="row">
                             <div class="col-md-12">
                                 <table class="table">
                                     <tbody>
                                         <tr>
                                             <td>Rating</td>
-                                            <td>@movie.Rating</td>
+                                            <td>@selectedMovie.Rating</td>
                                         </tr>
                                         <tr>
                                             <td>Duration</td>
-                                            <td>@(string.Format("{0}h {1}min", movie.TimeSpan / 60, movie.TimeSpan % 60))</td>
+                                            <td>@(string.Format("{0}h {1}min", selectedMovie.TimeSpan / 60, selectedMovie.TimeSpan % 60))</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -46,7 +46,7 @@
                     <img class="card-img-top img-fluid" src="@movie.ImageUrl" alt="@movie.MovieName">
                     <div class="card-body">
                         <h5 class="card-title">@movie.MovieName</h5>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <button type="button" class="btn btn-primary" @onclick="@(() => SelectMovie(movie))">Show Details</button>
                     </div>
                 </div>
             }
@@ -55,6 +55,18 @@
 </div>
 
 @code {
+    private Movie selectedMovie;
+    private List<Movie> movies = new MovieDataService().GetMovies();
+
+    protected override void OnInitialized()
+    {
+        selectedMovie = movies.OrderByDescending(m => m.Rating).First();
+    }
+
+    private void SelectMovie(Movie movie)
+    {
+        selectedMovie = movie;
+    }
 
     private class Movie
     {
@@ -65,7 +77,6 @@
         public string ImageUrl { get; set; }
     }
 
-    private List<Movie> movies = new MovieDataService().GetMovies();
 
     private class MovieDataService
     {

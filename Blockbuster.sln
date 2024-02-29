@@ -19,6 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "movie-images", "movie-images", "{66F49C24-AF50-419E-B0E6-673E3DDC01C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blockbuster.Domain", "..\Blockbuster.Domain\Blockbuster.Domain.csproj", "{198A3166-3ECE-47C7-B159-EE041038D7DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,10 @@ Global
 		{1F96A347-EE80-426C-9611-BC20A1AF069C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F96A347-EE80-426C-9611-BC20A1AF069C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F96A347-EE80-426C-9611-BC20A1AF069C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{198A3166-3ECE-47C7-B159-EE041038D7DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{198A3166-3ECE-47C7-B159-EE041038D7DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{198A3166-3ECE-47C7-B159-EE041038D7DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{198A3166-3ECE-47C7-B159-EE041038D7DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
