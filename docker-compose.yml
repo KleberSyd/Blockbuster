@@ -24,7 +24,9 @@ services:
       - -c
       - |
         /opt/mssql/bin/sqlservr & 
-        sleep 30 && /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'YourStrong!Passw0rd' -d master -i /var/opt/sqlscripts/application_db_context.sql
+        sleep 5 && /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'YourStrong!Passw0rd' -d master -i /var/opt/sqlscripts/blockbuster_users.sql
+        sleep 5 && /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'YourStrong!Passw0rd' -d master -i /var/opt/sqlscripts/blockbuster_movies.sql
+        sleep 5 && /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'YourStrong!Passw0rd' -d master -i /var/opt/sqlscripts/insert-moveis.sql
         wait
 
 

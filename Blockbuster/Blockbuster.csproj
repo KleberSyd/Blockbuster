@@ -10,8 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Blockbuster.Domain\Blockbuster.Domain.csproj" />
     <ProjectReference Include="..\Blockbuster.Client\Blockbuster.Client.csproj" />
+    <ProjectReference Include="..\Blockbuster.Domain\Blockbuster.Domain.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.2" />

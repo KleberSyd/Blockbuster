@@ -24,10 +24,15 @@ builder.Services.AddAuthentication(options =>
     })
     .AddIdentityCookies();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+var applicationConnectionString = builder.Configuration.GetConnectionString("ApplicationUserConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationUserConnection' not found.");
+var blockbusterConnectionString = builder.Configuration.GetConnectionString("BlockbusterConnection") ?? throw new InvalidOperationException("Connection string 'BlockbusterConnection' not found.");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(applicationConnectionString));
+
+builder.Services.AddDbContext<BlockbusterDbContext>(options =>
+    options.UseSqlServer(blockbusterConnectionString));
+
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 

@@ -5,8 +5,8 @@ namespace Blockbuster.Data;
 
 public class BlockbusterDbContext(DbContextOptions<BlockbusterDbContext> options) : DbContext(options)
 {
-    public DbSet<Comment> Comments { get; set; }
-    public DbSet<Movie> Movies { get; set; }
+    public required DbSet<Comment> Comments { get; set; }
+    public required DbSet<Movie> Movies { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -23,6 +23,9 @@ The application will run using docker-compose. The following steps will guide yo
 
 #### Create Database
 ```sh
+dotnet ef migrations add InitialCreate --context BlockbusterDbContext -o Data/BlockbusterMoviesMigrations
+
+```sh
 dotnet ef database update --context ApplicationDbContext
 
 ```sh
