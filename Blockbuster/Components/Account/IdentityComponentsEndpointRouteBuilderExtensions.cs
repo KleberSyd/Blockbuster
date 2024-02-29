@@ -10,13 +10,13 @@ using Microsoft.Extensions.Primitives;
 using System.Security.Claims;
 using System.Text.Json;
 
-namespace Microsoft.AspNetCore.Routing
+namespace Microsoft.AspNetCore.Routing;
+
+internal static class IdentityComponentsEndpointRouteBuilderExtensions
 {
-    internal static class IdentityComponentsEndpointRouteBuilderExtensions
+    // These endpoints are required by the Identity Razor components defined in the /Components/Account/Pages directory of this project.
+    public static IEndpointConventionBuilder MapAdditionalIdentityEndpoints(this IEndpointRouteBuilder endpoints)
     {
-        // These endpoints are required by the Identity Razor components defined in the /Components/Account/Pages directory of this project.
-        public static IEndpointConventionBuilder MapAdditionalIdentityEndpoints(this IEndpointRouteBuilder endpoints)
-        {
             ArgumentNullException.ThrowIfNull(endpoints);
 
             var accountGroup = endpoints.MapGroup("/Account");
@@ -109,5 +109,4 @@ namespace Microsoft.AspNetCore.Routing
 
             return accountGroup;
         }
-    }
 }

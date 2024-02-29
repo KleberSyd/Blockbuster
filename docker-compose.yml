@@ -6,3 +6,23 @@ services:
     build:
       context: .
       dockerfile: Blockbuster/Dockerfile
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest # Use the desired SQL Server version
+    container_name: sqlserverdb
+    environment:
+      SA_PASSWORD: "YourStrong!Passw0rd"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - sql_data:/var/opt/mssql # Persistent SQL Server data
+      - ./sql:/var/opt/sqlscripts # Mount the directory containing init.sql and cookie.sql
+    ports:
+      - "1433:1433" # Default SQL Server port
+    command:
+      - /bin/bash
+      - -c
+      - |
+        /opt/mssql/bin/sqlservr & 
+        sleep 30 && /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'YourStrong!Passw0rd' -d master -i /var/opt/sqlscripts/application_db_context.sql
+        wait
+
