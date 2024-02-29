@@ -35,6 +35,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "movie-images", "movie-image
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blockbuster.Domain", "Blockbuster.Domain\Blockbuster.Domain.csproj", "{D19A2033-99FA-4E05-A4B9-4FD94E3A4F61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blockbuster.Application", "Blockbuster.Application\Blockbuster.Application.csproj", "{B84CA109-4F5D-4BB9-8CF7-6FA20ACA6B0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blockbuster.Infrastructure", "Blockbuster.Infrastructure\Blockbuster.Infrastructure.csproj", "{031B0FD8-6423-40E4-820E-D6B56B719C36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +61,14 @@ Global
 		{D19A2033-99FA-4E05-A4B9-4FD94E3A4F61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D19A2033-99FA-4E05-A4B9-4FD94E3A4F61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D19A2033-99FA-4E05-A4B9-4FD94E3A4F61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B84CA109-4F5D-4BB9-8CF7-6FA20ACA6B0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B84CA109-4F5D-4BB9-8CF7-6FA20ACA6B0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B84CA109-4F5D-4BB9-8CF7-6FA20ACA6B0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B84CA109-4F5D-4BB9-8CF7-6FA20ACA6B0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{031B0FD8-6423-40E4-820E-D6B56B719C36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{031B0FD8-6423-40E4-820E-D6B56B719C36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{031B0FD8-6423-40E4-820E-D6B56B719C36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{031B0FD8-6423-40E4-820E-D6B56B719C36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
