@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  blockbuster:
+    image: ${DOCKER_REGISTRY-}blockbuster
+    build:
+      context: .
+      dockerfile: Blockbuster/Dockerfile
