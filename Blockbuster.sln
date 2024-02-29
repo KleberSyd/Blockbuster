@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sql", "sql", "{E195FC96-9C8
 	ProjectSection(SolutionItems) = preProject
 		sql\blockbuster_movies.sql = sql\blockbuster_movies.sql
 		sql\blockbuster_users.sql = sql\blockbuster_users.sql
-		insert-moveis.sql = insert-moveis.sql
+		sql\insert_moveis.sql = sql\insert_moveis.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CA839DF9-DDAA-46A9-A632-55478B9F387C}"
@@ -23,14 +23,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "movie-images", "movie-images", "{66F49C24-AF50-419E-B0E6-673E3DDC01C7}"
 	ProjectSection(SolutionItems) = preProject
-		movie-imagens\A romantic comedy movie poster set in Paris, featuring a charming bistro as the main backdrop. The Eiffel Tower looms in the distance, while in the fo.webp = movie-imagens\A romantic comedy movie poster set in Paris, featuring a charming bistro as the main backdrop. The Eiffel Tower looms in the distance, while in the fo.webp
-		movie-imagens\Asylum Shadows - A suspenseful horror movie poster set in a dilapidated asylum, with ghostly figures peering out from broken windows. The moon casts a sinister glow ov.webp = movie-imagens\Asylum Shadows - A suspenseful horror movie poster set in a dilapidated asylum, with ghostly figures peering out from broken windows. The moon casts a sinister glow ov.webp
-		movie-imagens\Dragon's Peak - An epic fantasy adventure movie poster featuring a majestic dragon perched atop a towering mountain, with a medieval castle nestled at its base. The s.webp = movie-imagens\Dragon's Peak - An epic fantasy adventure movie poster featuring a majestic dragon perched atop a towering mountain, with a medieval castle nestled at its base. The s.webp
-		movie-imagens\Galactic Requiem -An epic space opera movie poster, showcasing a vast galaxy with swirling nebulas, massive starships engaged in battle, and exotic alien planets in the.webp = movie-imagens\Galactic Requiem -An epic space opera movie poster, showcasing a vast galaxy with swirling nebulas, massive starships engaged in battle, and exotic alien planets in the.webp
-		movie-imagens\Invasion Battle - A thrilling science fiction movie poster showcasing a sleek, futuristic cityscape under siege by alien spacecraft. The sky is filled with advanced fig.webp = movie-imagens\Invasion Battle - A thrilling science fiction movie poster showcasing a sleek, futuristic cityscape under siege by alien spacecraft. The sky is filled with advanced fig.webp
-		movie-imagens\Love à la Parisienne - A gripping action movie poster featuring a daring heist in a bustling metropolis at night. Skyscrapers tower in the background, bathed in neon lights,.webp = movie-imagens\Love à la Parisienne - A gripping action movie poster featuring a daring heist in a bustling metropolis at night. Skyscrapers tower in the background, bathed in neon lights,.webp
-		movie-imagens\Shadows in the Fog - A mysterious noir film poster set in the 1940s, featuring shadowy figures in trench coats and fedoras lurking in fog-filled alleyways. The city's silh.webp = movie-imagens\Shadows in the Fog - A mysterious noir film poster set in the 1940s, featuring shadowy figures in trench coats and fedoras lurking in fog-filled alleyways. The city's silh.webp
-		movie-imagens\Whispering Woods - A heartwarming animated movie poster featuring a whimsical forest filled with talking animals of all kinds, gathered around a large, ancient tree that.webp = movie-imagens\Whispering Woods - A heartwarming animated movie poster featuring a whimsical forest filled with talking animals of all kinds, gathered around a large, ancient tree that.webp
+		movie-imagens\asylum_shadows.webp = movie-imagens\asylum_shadows.webp
+		movie-imagens\a_romantic_comedy_movie_poster_set_in_paris.webp = movie-imagens\a_romantic_comedy_movie_poster_set_in_paris.webp
+		movie-imagens\dragons_peak.webp = movie-imagens\dragons_peak.webp
+		movie-imagens\galactic_requiem.webp = movie-imagens\galactic_requiem.webp
+		movie-imagens\invasion_battle.webp = movie-imagens\invasion_battle.webp
+		movie-imagens\love_a_la_parisienne.webp = movie-imagens\love_a_la_parisienne.webp
+		movie-imagens\shadows_in_the_fog.webp = movie-imagens\shadows_in_the_fog.webp
+		movie-imagens\whispering_woods.webp = movie-imagens\whispering_woods.webp
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blockbuster.Domain", "Blockbuster.Domain\Blockbuster.Domain.csproj", "{D19A2033-99FA-4E05-A4B9-4FD94E3A4F61}"

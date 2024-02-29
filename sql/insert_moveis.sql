@@ -4,8 +4,7 @@ USE blockbuster_movies;
 GO
 
 -- Declare a variable to hold the current date
-DECLARE @tmp DATETIME
-SET @tmp = GETDATE()
+DECLARE @tmp DATETIME = GETDATE();
 
 -- Define a generic procedure for inserting movies if they don't already exist
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'InsertMovieIfNotExists')
@@ -32,7 +31,7 @@ BEGIN
         END
     END');
 END;
-GO
+
 
 
 -- Insert movies with creative details
@@ -44,3 +43,4 @@ EXEC InsertMovieIfNotExists N'Invasion: Earth', 'Sci-Fi/Action', 'Michael Bay', 
 EXEC InsertMovieIfNotExists N'Heist Under the Neon Lights', 'Action', 'Kathryn Bigelow', 2021, 6, '/app/movie-images/love_a_la_parisienne.webp', 'https://example.com/trailer6', 'A master thief and her crew plan the ultimate heist in a neon-lit metropolis, but betrayal lurks at every corner.', 1, 125, @tmp, NULL;
 EXEC InsertMovieIfNotExists N'Mist of the Noir', 'Noir', 'David Fincher', 2025, 10, '/app/movie-images/shadows_in_the_fog.webp', 'https://example.com/trailer7', 'In a city veiled by fog, a detective unravels a mystery entangled in the shadows of crime and corruption.', 1, 110, @tmp, NULL;
 EXEC InsertMovieIfNotExists N'The Enchanted Forest', 'Animated', 'Hayao Miyazaki', 2022, 9, '/app/movie-images/whispering_woods.webp', 'https://example.com/trailer8', 'A young girl discovers a magical forest where talking animals teach her about friendship', 1, 210, @tmp, NULL;
+GO
