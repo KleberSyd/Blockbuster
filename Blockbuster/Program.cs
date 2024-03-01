@@ -1,6 +1,9 @@
+using Blockbuster.Application.Interface;
+using Blockbuster.Application.Services;
 using Blockbuster.Components;
 using Blockbuster.Components.Account;
 using Blockbuster.Infrastructure.Data;
+using Blockbuster.Infrastructure.Data.DbContext;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +19,7 @@ builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<IdentityUserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
+builder.Services.AddScoped<IMovieService, MovieService>();
 
 builder.Services.AddAuthentication(options =>
     {

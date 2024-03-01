@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 using Blockbuster.Infrastructure.Data;
+using Blockbuster.Infrastructure.Data.DbContext;
 
 #nullable disable
 

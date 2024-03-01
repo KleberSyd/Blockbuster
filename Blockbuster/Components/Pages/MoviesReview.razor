@@ -1,4 +1,7 @@
 ﻿@page "/movies-review"
+@using Blockbuster.Application.Interface
+@using Blockbuster.Application.Models
+@inject IMovieService MovieService
 
 <PageTitle>Blockbuster - Movies Review</PageTitle>
 
@@ -12,24 +15,24 @@
     </div>
     <div class="row">
         <div class="col-md-8">
-            @if (selectedMovie != null)
+            @if (_selectedMovie != null)
             {
                 <div class="card">
-                    <img class="card-img-top img-fluid" src="@selectedMovie.ImageUrl" alt="@selectedMovie.MovieName">
+                    <img class="card-img-top img-fluid" src="@_selectedMovie.ImageUrl" alt="@_selectedMovie.Title">
                     <div class="card-body">
-                        <h5 class="card-title">@selectedMovie.MovieName</h5>
-                        <p class="card-text">@selectedMovie.Description</p>
+                        <h5 class="card-title">@_selectedMovie.Title</h5>
+                        <p class="card-text">@_selectedMovie.Description</p>
                         <div class="row">
                             <div class="col-md-12">
                                 <table class="table">
                                     <tbody>
                                         <tr>
                                             <td>Rating</td>
-                                            <td>@selectedMovie.Rating</td>
+                                            <td>@_selectedMovie.Rating</td>
                                         </tr>
                                         <tr>
                                             <td>Duration</td>
-                                            <td>@(string.Format("{0}h {1}min", selectedMovie.TimeSpan / 60, selectedMovie.TimeSpan % 60))</td>
+                                            <td>@($"{_selectedMovie.Timespan / 60}h {_selectedMovie.Timespan % 60}min")</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -40,145 +43,38 @@
             }
         </div>
         <div class="col-md-4">
-            @foreach (var movie in movies)
+            @if (_topRatedMovies == null)
             {
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top img-fluid" src="@movie.ImageUrl" alt="@movie.MovieName">
-                    <div class="card-body">
-                        <h5 class="card-title">@movie.MovieName</h5>
-                        <button type="button" class="btn btn-primary" @onclick="@(() => SelectMovie(movie))">Show Details</button>
+                <p><em>Loading...</em></p>
+            }
+            else
+            {
+                @foreach (var movie in _topRatedMovies)
+                {
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top img-fluid" src="@movie.ImageUrl" alt="@movie.Title">
+                        <div class="card-body">
+                            <h5 class="card-title">@movie.Title</h5>
+                            <button type="button" class="btn btn-primary" @onclick="@(() => SelectMovie(movie))">Show Details</button>
+                        </div>
                     </div>
-                </div>
+                }
             }
         </div>
     </div>
 </div>
 
 @code {
-    private Movie selectedMovie;
-    private List<Movie> movies = new MovieDataService().GetMovies();
+    private IEnumerable<MovieSummaryDto>? _topRatedMovies;
+    private MovieDto? _selectedMovie;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        selectedMovie = movies.OrderByDescending(m => m.Rating).First();
+        _topRatedMovies = await MovieService.GetTopRatedMoviesAsync();
     }
 
-    private void SelectMovie(Movie movie)
+    private async Task SelectMovie(MovieSummaryDto movie)
     {
-        selectedMovie = movie;
+        _selectedMovie = await MovieService.GetMovieAsync(movie.Id);
     }
-
-    private class Movie
-    {
-        public string MovieName { get; set; }
-        public int TimeSpan { get; set; }
-        public int Rating { get; set; }
-        public string Description { get; set; }
-        public string ImageUrl { get; set; }
-    }
-
-
-    private class MovieDataService
-    {
-        public List<Movie> GetMovies() => new List<Movie>
-        {
-            new Movie
-            {
-                MovieName = "Inception",
-                TimeSpan = 148,
-                Rating = 7,
-                Description = "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.",
-                ImageUrl = "https://example.com/inception.jpg"
-            },
-            new Movie
-            {
-                MovieName = "Movie 2",
-                TimeSpan = 120,
-                Rating = 6,
-                Description = "Description of Movie 2",
-                ImageUrl = "https://example.com/movie2.jpg"
-            },
-            new Movie
-            {
-                MovieName = "Movie 3",
-                TimeSpan = 90,
-                Rating = 8,
-                Description = "Description of Movie 3",
-                ImageUrl = "https://example.com/movie3.jpg"
-            },
-            new Movie
-            {
-                MovieName = "Movie 4",
-                TimeSpan = 105,
-                Rating = 7,
-                Description = "Description of Movie 4",
-                ImageUrl = "https://example.com/movie4.jpg"
-            },
-            new Movie
-            {
-                MovieName = "Movie 5",
-                TimeSpan = 135,
-                Rating = 9,
-                Description = "Description of Movie 5",
-                ImageUrl = "https://example.com/movie5.jpg"
-            },
-            new Movie
-            {
-                MovieName = "Movie 6",
-                TimeSpan = 100,
-                Rating = 8,
-                Description = "Description of Movie 6",
-                ImageUrl = "https://example.com/movie6.jpg"
-            },
-            new Movie
-            {
-                MovieName = "Movie 7",
-                TimeSpan = 115,
-                Rating = 7,
-                Description = "Description of Movie 7",
-                ImageUrl = "https://example.com/movie7.jpg"
-            },
-            new Movie
-            {
-                MovieName = "Movie 8",
-                TimeSpan = 130,
-                Rating = 6,
-                Description = "Description of Movie 8",
-                ImageUrl = "https://example.com/movie8.jpg"
-            },
-            new Movie
-            {
-                MovieName = "Movie 9",
-                TimeSpan = 95,
-                Rating = 8,
-                Description = "Description of Movie 9",
-                ImageUrl = "https://example.com/movie9.jpg"
-            },
-            new Movie
-            {
-                MovieName = "Movie 10",
-                TimeSpan = 110,
-                Rating = 7,
-                Description = "Description of Movie 10",
-                ImageUrl = "https://example.com/movie10.jpg"
-            },
-            new Movie
-            {
-                MovieName = "Movie 11",
-                TimeSpan = 125,
-                Rating = 9,
-                Description = "Description of Movie 11",
-                ImageUrl = "https://example.com/movie11.jpg"
-            },
-            new Movie
-            {
-                MovieName = "Movie 12",
-                TimeSpan = 140,
-                Rating = 8,
-                Description = "Description of Movie 12",
-                ImageUrl = "https://example.com/movie12.jpg"
-            }
-        };
-    }
-
 }

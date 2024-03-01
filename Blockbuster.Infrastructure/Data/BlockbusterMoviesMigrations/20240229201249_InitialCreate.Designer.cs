@@ -2,6 +2,7 @@
 
 #nullable disable
 
+using Blockbuster.Infrastructure.Data.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;

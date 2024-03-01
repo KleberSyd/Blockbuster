@@ -1,9 +1,9 @@
 ﻿using Blockbuster.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Blockbuster.Infrastructure.Data;
+namespace Blockbuster.Infrastructure.Data.DbContext;
 
-public class BlockbusterDbContext(DbContextOptions<BlockbusterDbContext> options) : DbContext(options)
+public class BlockbusterDbContext(DbContextOptions<BlockbusterDbContext> options) : Microsoft.EntityFrameworkCore.DbContext(options)
 {
     public required DbSet<Comment> Comments { get; set; }
     public required DbSet<Movie> Movies { get; set; }

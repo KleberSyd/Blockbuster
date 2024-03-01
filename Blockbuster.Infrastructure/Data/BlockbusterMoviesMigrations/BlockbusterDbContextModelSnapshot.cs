@@ -2,6 +2,7 @@
 using System;
 using Blockbuster.Data;
 using Blockbuster.Infrastructure.Data;
+using Blockbuster.Infrastructure.Data.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
