@@ -25,6 +25,9 @@ The application will run using docker-compose. The following steps will guide yo
 ```sh
 dotnet ef migrations add InitialCreate --context BlockbusterDbContext -o Data/BlockbusterMoviesMigrations
 
+
+In theory, docker compose will create all tables, but soimetimes, the user tables not work, so you can run the following command to create the tables
+don't forget to change the connection string in the appsettings.json file to use localhost instead of the database name from docker compose
 ```sh
 dotnet ef database update --context ApplicationDbContext
 
