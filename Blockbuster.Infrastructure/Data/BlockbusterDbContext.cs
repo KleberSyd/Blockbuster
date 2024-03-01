@@ -1,7 +1,7 @@
-﻿using Blockbuster.Domain.Models;
+﻿using Blockbuster.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Blockbuster.Data;
+namespace Blockbuster.Infrastructure.Data;
 
 public class BlockbusterDbContext(DbContextOptions<BlockbusterDbContext> options) : DbContext(options)
 {

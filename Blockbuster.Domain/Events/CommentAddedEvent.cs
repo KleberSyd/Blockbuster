@@ -1,4 +1,4 @@
-﻿using Blockbuster.Domain.Models;
+﻿using Blockbuster.Domain.Entities;
 
 namespace Blockbuster.Domain.Events;
 

@@ -1,9 +1,8 @@
-﻿using System;
+﻿#nullable disable
+
 using Microsoft.EntityFrameworkCore.Migrations;
 
-#nullable disable
-
-namespace Blockbuster.Data.BlockbusterMoviesMigrations
+namespace Blockbuster.Infrastructure.Data.BlockbusterMoviesMigrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

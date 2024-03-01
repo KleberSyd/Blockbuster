@@ -1,4 +1,4 @@
-using Blockbuster.Data;
+using Blockbuster.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 
 namespace Blockbuster.Components.Account;

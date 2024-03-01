@@ -1,16 +1,16 @@
+using System.Security.Claims;
+using System.Text.Json;
 using Blockbuster.Components.Account.Pages;
 using Blockbuster.Components.Account.Pages.Manage;
-using Blockbuster.Data;
+using Blockbuster.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
-using System.Security.Claims;
-using System.Text.Json;
 
-namespace Microsoft.AspNetCore.Routing;
+namespace Blockbuster.Components.Account;
 
 internal static class IdentityComponentsEndpointRouteBuilderExtensions
 {

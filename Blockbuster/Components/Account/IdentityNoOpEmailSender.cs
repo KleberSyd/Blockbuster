@@ -1,4 +1,4 @@
-using Blockbuster.Data;
+using Blockbuster.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 

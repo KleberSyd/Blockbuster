@@ -1,6 +1,6 @@
 using Blockbuster.Components;
 using Blockbuster.Components.Account;
-using Blockbuster.Data;
+using Blockbuster.Infrastructure.Data;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

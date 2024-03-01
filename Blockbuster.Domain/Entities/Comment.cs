@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace Blockbuster.Domain.Models;
+namespace Blockbuster.Domain.Entities;
 
 public class Comment
 {
