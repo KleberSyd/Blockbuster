@@ -28,11 +28,12 @@ public class MovieService(BlockbusterDbContext context) : IMovieService
             .SingleAsync();
     }
 
-    public async Task<IEnumerable<MovieSummaryDto>?> GetTopRatedMoviesAsync()
+    public async Task<IEnumerable<MovieSummaryDto>?> GetTopRatedMoviesAsync(int limit, int offset)
     {
         return await context.Movies
             .OrderByDescending(m => m.Rating)
-            .Take(5)
+            .Skip(offset)
+            .Take(limit)
             .Select(m => new MovieSummaryDto
             {
                 Id = m.Id,

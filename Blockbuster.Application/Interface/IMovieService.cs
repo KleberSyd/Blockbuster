@@ -5,6 +5,6 @@ namespace Blockbuster.Application.Interface;
 public interface IMovieService
 {
     Task<MovieDto?> GetMovieAsync(int movieId);
-    Task<IEnumerable<MovieSummaryDto>?> GetTopRatedMoviesAsync();
+    Task<IEnumerable<MovieSummaryDto>?> GetTopRatedMoviesAsync(int limit, int offset);
 
 }
