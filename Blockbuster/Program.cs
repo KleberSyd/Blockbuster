@@ -7,6 +7,7 @@ using Blockbuster.Infrastructure.Data.DbContext;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -65,6 +66,14 @@ else
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "movie-images")),
+    RequestPath = "/movie-images"
+});
+
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
