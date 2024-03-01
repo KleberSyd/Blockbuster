@@ -71,6 +71,10 @@
     protected override async Task OnInitializedAsync()
     {
         _topRatedMovies = await MovieService.GetTopRatedMoviesAsync();
+        if (_topRatedMovies != null)
+        {
+            _selectedMovie = await MovieService.GetMovieAsync(_topRatedMovies.First().Id);
+        }
     }
 
     private async Task SelectMovie(MovieSummaryDto movie)

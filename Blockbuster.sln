@@ -23,21 +23,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "movie-images", "movie-images", "{66F49C24-AF50-419E-B0E6-673E3DDC01C7}"
 	ProjectSection(SolutionItems) = preProject
-		movie-imagens\asylum_shadows.webp = movie-imagens\asylum_shadows.webp
-		movie-imagens\a_romantic_comedy_movie_poster_set_in_paris.webp = movie-imagens\a_romantic_comedy_movie_poster_set_in_paris.webp
-		movie-imagens\dragons_peak.webp = movie-imagens\dragons_peak.webp
-		movie-imagens\galactic_requiem.webp = movie-imagens\galactic_requiem.webp
-		movie-imagens\invasion_battle.webp = movie-imagens\invasion_battle.webp
-		movie-imagens\love_a_la_parisienne.webp = movie-imagens\love_a_la_parisienne.webp
-		movie-imagens\shadows_in_the_fog.webp = movie-imagens\shadows_in_the_fog.webp
-		movie-imagens\whispering_woods.webp = movie-imagens\whispering_woods.webp
+		movie-images\asylum_shadows.webp = movie-images\asylum_shadows.webp
+		movie-images\a_romantic_comedy_movie_poster_set_in_paris.webp = movie-images\a_romantic_comedy_movie_poster_set_in_paris.webp
+		movie-images\dragons_peak.webp = movie-images\dragons_peak.webp
+		movie-images\galactic_requiem.webp = movie-images\galactic_requiem.webp
+		movie-images\invasion_battle.webp = movie-images\invasion_battle.webp
+		movie-images\love_a_la_parisienne.webp = movie-images\love_a_la_parisienne.webp
+		movie-images\shadows_in_the_fog.webp = movie-images\shadows_in_the_fog.webp
+		movie-images\whispering_woods.webp = movie-images\whispering_woods.webp
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blockbuster.Domain", "Blockbuster.Domain\Blockbuster.Domain.csproj", "{D19A2033-99FA-4E05-A4B9-4FD94E3A4F61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blockbuster.Application", "Blockbuster.Application\Blockbuster.Application.csproj", "{B84CA109-4F5D-4BB9-8CF7-6FA20ACA6B0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blockbuster.Application", "Blockbuster.Application\Blockbuster.Application.csproj", "{B84CA109-4F5D-4BB9-8CF7-6FA20ACA6B0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blockbuster.Infrastructure", "Blockbuster.Infrastructure\Blockbuster.Infrastructure.csproj", "{031B0FD8-6423-40E4-820E-D6B56B719C36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blockbuster.Infrastructure", "Blockbuster.Infrastructure\Blockbuster.Infrastructure.csproj", "{031B0FD8-6423-40E4-820E-D6B56B719C36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
