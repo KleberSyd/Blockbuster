@@ -2,3 +2,11 @@
     max-height: 40rem;
     overflow-y: auto;
 }
+
+.suggestions-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    z-index: 1000;
+}

@@ -1,0 +1,77 @@
+﻿@using System.Timers
+@typeparam TItem
+
+<div class="search-bar input-group input-group-lg">
+    <span class="input-group-text" id="inputGroup-sizing-lg">Find</span>
+    <input @bind="SearchText" @oninput="HandleInput" class="form-control" placeholder="Search movies..." />
+    @if (Suggestions.Any())
+    {
+        <ul class="suggestions-list">
+            @foreach (var suggestion in Suggestions)
+            {
+                <li @onclick="() => SelectSuggestion(suggestion)">
+                    @suggestion
+                </li>
+            }
+        </ul>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<string?> OnSearch { get; set; }
+
+    [Parameter]
+    public Func<string?, Task<IEnumerable<TItem>>>? FetchSuggestions { get; set; }
+
+    private Timer? _debounceTimer;
+    private string? _searchText = string.Empty;
+    private IEnumerable<TItem> Suggestions { get; set; } = new List<TItem>();
+
+    public string? SearchText
+    {
+        get => _searchText;
+        set
+        {
+            _searchText = value;
+            _debounceTimer?.Stop();
+            _debounceTimer?.Start();
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        _debounceTimer = new Timer(500);
+        _debounceTimer.Elapsed += async (_, _) =>
+        {
+            if (SearchText is { Length: >= 3 })
+            {
+                Suggestions = await FetchSuggestions?.Invoke(SearchText)!;
+                await InvokeAsync(StateHasChanged);
+            }
+            else
+            {
+                Suggestions = new List<TItem>();
+                await InvokeAsync(StateHasChanged);
+            }
+        };
+        _debounceTimer.AutoReset = false;
+    }
+
+    private void HandleInput(ChangeEventArgs e)
+    {
+        SearchText = e.Value?.ToString() ?? string.Empty;
+    }
+
+    private async Task SelectSuggestion(TItem suggestion)
+    {
+        SearchText = suggestion?.ToString();
+        Suggestions = new List<TItem>();
+        await OnSearch.InvokeAsync(SearchText);
+    }
+
+    public void Dispose()
+    {
+        _debounceTimer?.Dispose();
+    }
+}

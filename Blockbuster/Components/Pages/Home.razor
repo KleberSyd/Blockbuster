@@ -2,6 +2,7 @@
 @rendermode InteractiveServer
 @using Blockbuster.Application.Interface
 @using Blockbuster.Application.Models
+@using Blockbuster.Components.Shared
 @inject IMovieService MovieService
 
 <PageTitle>Blockbuster - Movies Review</PageTitle>
@@ -11,7 +12,7 @@
 <div class="container mt-3">
     <div class="row mb-3">
         <div class="col">
-            <input type="search" class="form-control" placeholder="Search movies...">
+            <SearchBar FetchSuggestions="GetSuggestions" OnSearch="HandleSearch" />
         </div>
     </div>
     <div class="row">
@@ -123,5 +124,16 @@
         {
             _showLoadMore = false;
         }
+    }
+
+    private async Task<IEnumerable<string>> GetSuggestions(string searchText)
+    {
+        var suggestions = await MovieService.GetMovieSuggestionsAsync(searchText);
+        return suggestions.Select(s => s.Title);
+    }
+
+    private async Task HandleSearch(string query)
+    {
+        _selectedMovie = (await MovieService.SearchMoviesAsync(query)).FirstOrDefault();
     }
 }
