@@ -2,11 +2,12 @@
 @typeparam TItem
 
 <div class="search-bar input-group input-group-lg">
-    <span class="input-group-text" id="inputGroup-sizing-lg">Find</span>
-    <input @bind="SearchText" @oninput="HandleInput" class="form-control" placeholder="Search movies..." />
+    <span class="input-group-text" id="inputGroup-sizing-lg">Large</span>
+    <input @bind="SearchText" @oninput="HandleInput" class="form-control" placeholder="Search movies..." list="datalistOptions" />
     @if (Suggestions.Any())
     {
-        <ul class="suggestions-list">
+        <ul class="suggestions-list"
+            style="list-style-type: none; margin: 3rem 0 0 5rem; padding: 1rem; position: absolute; z-index: 1002; background-color: white; font-size: large;">
             @foreach (var suggestion in Suggestions)
             {
                 <li @onclick="() => SelectSuggestion(suggestion)">
@@ -19,34 +20,34 @@
 
 @code {
     [Parameter]
-    public EventCallback<string?> OnSearch { get; set; }
+    public EventCallback<string> OnSearch { get; set; }
 
     [Parameter]
-    public Func<string?, Task<IEnumerable<TItem>>>? FetchSuggestions { get; set; }
+    public Func<string, Task<IEnumerable<TItem>>> FetchSuggestions { get; set; }
 
-    private Timer? _debounceTimer;
-    private string? _searchText = string.Empty;
+    private Timer debounceTimer;
+    private string searchText = string.Empty;
     private IEnumerable<TItem> Suggestions { get; set; } = new List<TItem>();
 
-    public string? SearchText
+    public string SearchText
     {
-        get => _searchText;
+        get => searchText;
         set
         {
-            _searchText = value;
-            _debounceTimer?.Stop();
-            _debounceTimer?.Start();
+            searchText = value;
+            debounceTimer.Stop();
+            debounceTimer.Start();
         }
     }
 
     protected override void OnInitialized()
     {
-        _debounceTimer = new Timer(500);
-        _debounceTimer.Elapsed += async (_, _) =>
+        debounceTimer = new Timer(500);
+        debounceTimer.Elapsed += async (sender, args) =>
         {
-            if (SearchText is { Length: >= 3 })
+            if (SearchText.Length >= 3)
             {
-                Suggestions = await FetchSuggestions?.Invoke(SearchText)!;
+                Suggestions = await FetchSuggestions.Invoke(SearchText);
                 await InvokeAsync(StateHasChanged);
             }
             else
@@ -55,7 +56,7 @@
                 await InvokeAsync(StateHasChanged);
             }
         };
-        _debounceTimer.AutoReset = false;
+        debounceTimer.AutoReset = false;
     }
 
     private void HandleInput(ChangeEventArgs e)
@@ -65,13 +66,14 @@
 
     private async Task SelectSuggestion(TItem suggestion)
     {
-        SearchText = suggestion?.ToString();
+        SearchText = suggestion.ToString();
         Suggestions = new List<TItem>();
         await OnSearch.InvokeAsync(SearchText);
+        searchText = string.Empty;
     }
 
     public void Dispose()
     {
-        _debounceTimer?.Dispose();
+        debounceTimer?.Dispose();
     }
 }
