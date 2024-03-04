@@ -67,7 +67,7 @@
     public AddMovie? Modal { get; set; }
 
     private List<MovieEditDto>? _moviesEditDto;
-    private readonly List<int> _selectedMovieIds = [];
+    private List<int> _selectedMovieIds = [];
     private const int MoviesToShow = 100;
     public int Offset;
 
@@ -116,6 +116,7 @@
         await MovieService.DeleteMoviesAsync(_selectedMovieIds);
         _selectedMovieIds.Clear();
         await OnInitializedAsync();
+        _selectedMovieIds = [];
     }
 
 }

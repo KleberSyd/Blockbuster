@@ -168,14 +168,14 @@ public class MovieService(BlockbusterDbContext context) : IMovieService
         if (file is null) return null;
         ArgumentNullException.ThrowIfNull(file);
 
-        var path = Path.Combine("wwwroot", "movie-images", file.Name);
+        var path = Path.Combine("movie-images", file.Name);
         var savePath = Path.Combine(Directory.GetCurrentDirectory(), path);
 
         await using var fileStream = file.OpenReadStream(maxAllowedSize: 1024 * 1024);
         await using var saveFileStream = new FileStream(savePath, FileMode.Create);
         await fileStream.CopyToAsync(saveFileStream);
 
-        return path.Replace("wwwroot", "");
+        return path;
     }
 
     /// <summary>
