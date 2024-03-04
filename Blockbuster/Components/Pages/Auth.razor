@@ -1,0 +1,103 @@
+﻿@page "/admin-movies"
+@rendermode InteractiveServer
+
+@using Blockbuster.Application.Interface
+@using Blockbuster.Application.Models
+@using Blockbuster.Components.Shared
+@using Microsoft.AspNetCore.Authorization
+
+@inject IMovieService MovieService
+@attribute [Authorize]
+
+<PageTitle>Movies Management</PageTitle>
+
+<AuthorizeView>
+    <h1>Hello @context.User.Identity?.Name!</h1>
+
+    <div class="container mt-3">
+        <div class="row mb-3">
+            <div class="col">
+                <SearchBar FetchSuggestions="GetSuggestions" OnSearch="HandleSearch" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary" @onclick="() => Modal.Open()">Add Movie</button>
+
+                <button class="btn btn-danger">Delete</button>
+            </div>
+            <div class="col-md-10">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Delete</th>
+                        <th>Movie Name</th>
+                        <th>Time Span</th>
+                        <th>Rating</th>
+                        <th>Image</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @if (_moviesEditDto != null)
+                    {
+                        foreach (var movie in _moviesEditDto.OrderBy(m => m.Title))
+                        {
+                            <tr>
+                                <td>
+                                    <input type="checkbox"/>
+                                </td>
+                                <td>@movie.Title</td>
+                                <td>@FormatTimeSpan(movie.Timespan)</td>
+                                <td>@movie.Rating</td>
+                                <td>
+                                    <img src="@movie.ImageUrl" alt="Movie Image" style="width: 50px; height: auto;">
+                                </td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <AddMovie @ref="Modal"></AddMovie>
+
+</AuthorizeView>
+
+@code {
+    private List<MovieEditDto>? _moviesEditDto;
+    private const int MoviesToShow = 100;
+    private int _offset;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _moviesEditDto = (await MovieService.GetMoviesAdminAsync(MoviesToShow, _offset)).ToList();
+    }
+
+
+    private async Task<IEnumerable<string>> GetSuggestions(string searchText)
+    {
+        var suggestions = await MovieService.GetMovieSuggestionsAsync(searchText);
+        return suggestions.Select(s => s.Title);
+    }
+
+    private async Task HandleSearch(string query)
+    {
+        _moviesEditDto = (await MovieService.SearchMoviesAsync(query)).Select(dto => new MovieEditDto
+            {
+                Id = dto.Id,
+                Title = dto.Title,
+                Timespan = dto.Timespan,
+                Rating = dto.Rating,
+                ImageUrl = dto.ImageUrl
+            }).ToList();
+    }
+
+    private static string FormatTimeSpan(int minutes)
+    {
+        return $"{minutes / 60.0:N1} hours";
+    }
+
+    public AddMovie Modal { get; set; }
+
+}

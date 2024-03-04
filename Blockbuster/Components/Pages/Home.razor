@@ -20,7 +20,9 @@
             @if (_selectedMovie != null)
             {
                 <div class="card">
-                    <img class="card-img-top img-fluid" src="@_selectedMovie.ImageUrl" alt="@_selectedMovie.Title">
+                    <div class="image-container">
+                        <img class="card-img-top img-fluid" src="@_selectedMovie.ImageUrl" alt="@_selectedMovie.Title">
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">@_selectedMovie.Title</h5>
                         <p class="card-text">@_selectedMovie.Description</p>

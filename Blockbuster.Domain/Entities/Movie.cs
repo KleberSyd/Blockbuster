@@ -8,7 +8,7 @@ public class Movie
     protected Movie() { }
 
     [SetsRequiredMembers]
-    public Movie(string title, string genre, string director, int year, int rating, string imageUrl,
+    public Movie(string title, string genre, string director, int year, int rating, string? imageUrl,
         string trailerUrl, string description, bool isAvailable)
     {
         Title = title;
@@ -27,7 +27,7 @@ public class Movie
     public string Director { get; set; }
     public int Year { get; set; }
     public int Rating { get; set; }
-    public string ImageUrl { get; set; }
+    public string? ImageUrl { get; set; }
     public string TrailerUrl { get; set; }
     public string Description { get; set; }
     public bool IsAvailable { get; set; }

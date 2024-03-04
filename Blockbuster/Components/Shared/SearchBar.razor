@@ -6,8 +6,7 @@
     <input @bind="SearchText" @oninput="HandleInput" class="form-control" placeholder="Search movies..." list="datalistOptions" />
     @if (Suggestions.Any())
     {
-        <ul class="suggestions-list"
-            style="list-style-type: none; margin: 3rem 0 0 5rem; padding: 1rem; position: absolute; z-index: 1002; background-color: white; font-size: large;">
+        <ul class="suggestions-list">
             @foreach (var suggestion in Suggestions)
             {
                 <li @onclick="() => SelectSuggestion(suggestion)">

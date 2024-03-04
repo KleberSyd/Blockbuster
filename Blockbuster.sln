@@ -25,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "movie-images", "movie-image
 	ProjectSection(SolutionItems) = preProject
 		movie-images\asylum_shadows.webp = movie-images\asylum_shadows.webp
 		movie-images\a_romantic_comedy_movie_poster_set_in_paris.webp = movie-images\a_romantic_comedy_movie_poster_set_in_paris.webp
+		movie-images\blank.jpeg = movie-images\blank.jpeg
 		movie-images\dragons_peak.webp = movie-images\dragons_peak.webp
 		movie-images\galactic_requiem.webp = movie-images\galactic_requiem.webp
 		movie-images\invasion_battle.webp = movie-images\invasion_battle.webp

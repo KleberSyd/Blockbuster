@@ -1,0 +1,170 @@
+﻿@inject IMovieService MovieService
+@using Blockbuster.Application.Models
+@using Blockbuster.Application.Interface
+@using System.Text.RegularExpressions
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <EditForm Model="@_movie" OnValidSubmit="@HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <InputText id="title" class="form-control" @bind-Value="_movie.Title"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <InputTextArea id="description" class="form-control" @bind-Value="_movie.Description"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="genre">Genre</label>
+                        <InputText id="genre" class="form-control" @bind-Value="_movie.Genre"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="director">Director</label>
+                        <InputText id="director" class="form-control" @bind-Value="_movie.Director"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Year</label>
+                        <InputNumber id="year" class="form-control" @bind-Value="_movie.Year" min="1900" placeholder="2024" />
+                    </div>
+                    <div class="form-group">
+                        <label for="rating">Rating</label>
+                        <InputNumber id="rating" class="form-control" @bind-Value="_movie.Rating" min="1" max="10" />
+                        <ValidationMessage For="@(() => _movie.Rating)" />
+                    </div>
+                    <div class="form-group">
+                        <label for="timespan">Genre</label>
+                        <InputText id="timespan" class="form-control" @bind-Value="_movie.TimespanText" @onblur="ValidateTimespan" placeholder="Duration (e.g., 2 hours, 90 minutes)" />
+                        <ValidationMessage For="@(() => _movie.TimespanText)" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imageUpload">Image</label>
+                        <InputFile class="form-control" id="imageUpload" OnChange="@HandleImageUpload" />
+                        <p>@_imageUploadMessage</p>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="Close">Close</button>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+
+@if (_showErrorAlert)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @_errorMessage
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+
+@code {
+
+    private string _errorMessage = string.Empty;
+    private bool _showErrorAlert = false;
+    public Guid Guid = Guid.NewGuid();
+    public string ModalDisplay = "none;";
+    public string ModalClass = "";
+    public bool ShowBackdrop = false;
+    private MovieDto _movie = new MovieDto();
+    private string _imageUploadMessage = "No file chosen";
+    private IBrowserFile? _uploadedFile;
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            await MovieService.SaveMovieAsync(_movie);
+            Close();
+            _showErrorAlert = false; 
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = $"Error occuring to save: {ex.Message}";
+            _showErrorAlert = true;
+        }
+    }
+
+    private async Task HandleImageUpload(InputFileChangeEventArgs e)
+    {
+        _uploadedFile = e.File;
+        _imageUploadMessage = $"File: {_uploadedFile.Name}";
+        try
+        {
+            var path = await MovieService.UploadImageAsync(_uploadedFile);
+            _movie.ImageUrl = path;
+        }
+        catch (Exception ex)
+        {
+            _imageUploadMessage = $"Error uploading image: {ex.Message}";
+        }
+    }
+
+    private void ValidateTimespan()
+    {
+        if (string.IsNullOrWhiteSpace(_movie.TimespanText))
+        {
+            return;
+        }
+
+        var regex = new Regex(@"^(\d+)(\s+)?(hours|minutes)$");
+        var match = regex.Match(_movie.TimespanText);
+        if (!match.Success)
+        {
+            return;
+        }
+
+        var value = int.Parse(match.Groups[1].Value);
+        if (match.Groups[3].Value == "hours")
+        {
+            value *= 60;
+        }
+
+        if (value is < 0 or > 180)
+        {
+            
+            return;
+        }
+
+        _movie.Timespan = value;
+    }
+
+
+    public void Open()
+    {
+        ModalDisplay = "block;";
+        ModalClass = "Show";
+        ShowBackdrop = true;
+        StateHasChanged();
+    }
+
+    public void Close()
+    {
+        ModalDisplay = "none";
+        ModalClass = "";
+        ShowBackdrop = false;
+        StateHasChanged();
+    }
+}
