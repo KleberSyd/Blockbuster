@@ -9,15 +9,15 @@ public class Movie
 
     [SetsRequiredMembers]
     public Movie(string title, string genre, string director, int year, int rating, string? imageUrl,
-        string trailerUrl, string description, bool isAvailable)
+        string? trailerUrl, string description, bool isAvailable)
     {
         Title = title;
         Genre = genre;
         Director = director;
         Year = year;
         Rating = rating;
-        ImageUrl = imageUrl;
-        TrailerUrl = trailerUrl;
+        ImageUrl = string.IsNullOrWhiteSpace(imageUrl) ? "/movie-images/blank.jpeg" : imageUrl;
+        TrailerUrl = string.IsNullOrWhiteSpace(imageUrl) ? string.Empty : trailerUrl;
         Description = description;
         IsAvailable = isAvailable;
     }
@@ -28,7 +28,7 @@ public class Movie
     public int Year { get; set; }
     public int Rating { get; set; }
     public string? ImageUrl { get; set; }
-    public string TrailerUrl { get; set; }
+    public string? TrailerUrl { get; set; }
     public string Description { get; set; }
     public bool IsAvailable { get; set; }
     public int Timespan { get; set; }

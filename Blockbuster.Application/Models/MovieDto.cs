@@ -19,7 +19,7 @@ public record MovieDto
         }
     }
     public string? ImageUrl { get; set; }
-    public string TrailerUrl { get; set; }
+    public string? TrailerUrl { get; set; }
     public string Description { get; set; }
     public bool IsAvailable { get; set; }
 

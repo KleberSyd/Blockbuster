@@ -22,9 +22,8 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <button type="button" class="btn btn-primary" @onclick="() => Modal.Open()">Add Movie</button>
-
-                <button class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-primary" @onclick="() => Modal?.Open()">Add Movie</button>
+                <button class="btn btn-danger" @onclick="DeleteSelectedMovies">Delete</button>
             </div>
             <div class="col-md-10">
                 <table class="table">
@@ -44,7 +43,7 @@
                         {
                             <tr>
                                 <td>
-                                    <input type="checkbox"/>
+                                    <input type="checkbox" value="@movie.Id" @onchange="()=>SelectMovie(movie.Id)" />
                                 </td>
                                 <td>@movie.Title</td>
                                 <td>@FormatTimeSpan(movie.Timespan)</td>
@@ -65,15 +64,17 @@
 </AuthorizeView>
 
 @code {
+    public AddMovie? Modal { get; set; }
+
     private List<MovieEditDto>? _moviesEditDto;
+    private readonly List<int> _selectedMovieIds = [];
     private const int MoviesToShow = 100;
-    private int _offset;
+    public int Offset;
 
     protected override async Task OnInitializedAsync()
     {
-        _moviesEditDto = (await MovieService.GetMoviesAdminAsync(MoviesToShow, _offset)).ToList();
+        _moviesEditDto = (await MovieService.GetMoviesAdminAsync(MoviesToShow, Offset)).ToList();
     }
-
 
     private async Task<IEnumerable<string>> GetSuggestions(string searchText)
     {
@@ -98,6 +99,23 @@
         return $"{minutes / 60.0:N1} hours";
     }
 
-    public AddMovie Modal { get; set; }
+    private void SelectMovie(int movieId)
+    {
+        if (_selectedMovieIds.Contains(movieId))
+        {
+            _selectedMovieIds.Remove(movieId);
+        }
+        else
+        {
+            _selectedMovieIds.Add(movieId);
+        }
+    }
+
+    private async Task DeleteSelectedMovies()
+    {
+        await MovieService.DeleteMoviesAsync(_selectedMovieIds);
+        _selectedMovieIds.Clear();
+        await OnInitializedAsync();
+    }
 
 }
